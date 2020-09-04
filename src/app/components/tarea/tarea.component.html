@@ -1,0 +1,55 @@
+<div class="login-page sidebar-collapse">
+    <div class="page-header header-filter" style="background-size: cover; background-position: top center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+                    <div class="pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Agregar tarea</h1>
+
+                    </div>
+
+                    <!-- Student form -->
+                    <form [formGroup]="tareaForm" (ngSubmit)="submitTareaData()" novalidate>
+                        <div class="row">
+                            <div class="pt-3 pb-2 mb-3 border-bottom">
+                                <div class="row">
+
+                                    <div class="col-md-12 mb-3">
+                                        <label>nombre tarea</label> <strong></strong>
+                                        <input type="text" formControlName="nombreTarea" class="form-control" required>
+                                        <!-- Showing errors using getter method -->
+                                        <p *ngIf="nombreTarea.touched && nombreTarea.invalid" class="error"><sup>*</sup>Nombre no valido</p>
+                                        <p *ngIf="descripcion.errors?.minlength" class="error"><sup>*</sup>nombre debe tener mas de dos letras</p>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label>Descripcion</label>
+                                        <input type="text" formControlName="descripcion" class="form-control">
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Coordenadas</label>
+                                        <input type="text" formControlName="coordenadas" class="form-control" required>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <button type="button" class="btn btn-secondary gap-right" (click)="ResetForm()">Reset</button>
+                                    <button type="submit" class="btn btn-success" [disabled]="!tareaForm.valid">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<router-outlet></router-outlet>
+<hr>

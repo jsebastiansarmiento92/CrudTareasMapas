@@ -1,0 +1,65 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Listado de Tareas</h1>
+
+    <a (click)="agregartarea()" class="btn btn-success" *ngIf="ocultar">
+        <i style="margin-right: 2px;" class="material-icons">addchart</i> <i></i> Agregar tarea
+    </a>
+</div>
+
+<div class="pricing-header mx-auto">
+
+
+    <div class="no-data text-center" *ngIf="preLoader">
+        <img src="assets/preloader.gif" class="preloader-icon" alt="No student">
+    </div>
+
+
+    <div class="no-data text-center" *ngIf="noData">
+        <img src="assets/no-student.svg" class="nodata-msg" alt="No student">
+        <p class="nodata-msg">No student added yet!</p>
+        <a routerLink="/register-student" class="btn btn-success">
+            <i class="fas fa-plus custom-fa-plus"></i> Add Student
+        </a>
+    </div>
+
+    <!-- Showing students data -->
+    <div class="table-responsive" *ngIf="ocultar">
+        <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+            <thead>
+                <tr>
+                    <th scope="col">Tarea Id</th>
+                    <th scope="col">nombreTarea</th>
+                    <th scope="col">descripcion</th>
+                    <th scope="col">coordenadas</th>
+                    <th class="text-center" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- *ngFor loop iterates over Student array and fetch the student's data -->
+                <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
+                <tr *ngFor="let tarea of tareas ; let i = index;">
+                    <th scope="row">{{tarea.$key}}</th>
+                    <td>{{tarea.nombreTarea}} </td>
+                    <td>{{tarea.descripcion}}</td>
+                    <td>{{tarea.coordenadas}}</td>
+                    <td class="text-center action-block">
+                        <i style="margin-right: 2px;" class="material-icons" (click)="deleteTarea(tarea)">delete</i>
+                        <i style="margin-right: 2px;" class="material-icons" (click)="editar(tarea, modalEditar)">edit</i>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pagination -->
+    <!--  <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>-->
+
+</div>
+<ng-template #modalEditar>
+    <app-edit-tarea></app-edit-tarea>
+</ng-template>

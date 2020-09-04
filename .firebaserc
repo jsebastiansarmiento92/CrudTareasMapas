@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "crudwigilabs": {
+      "hosting": {
+        "crud": [
+          "crudwigilabs"
+        ]
+      }
+    }
+  }
+}
