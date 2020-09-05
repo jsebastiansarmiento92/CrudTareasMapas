@@ -37,8 +37,7 @@ export class TareaServiceService {
 
  
   updateTarea(tarea: Tarea) {
-    console.log("dtaos que ingresan en el update");
-    console.log(tarea);
+    
     this.tareaRef.update({
       nombreTarea: tarea.nombreTarea,
       descripcion: tarea.descripcion,

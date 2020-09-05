@@ -42,7 +42,7 @@ export class TareaComponent implements OnInit {
         .addTo(this.map);
 
         this.marker.on('drag',()=>{
-          console.log(this.marker.getLngLat()) ;
+          
         })
 
     }
@@ -72,12 +72,11 @@ export class TareaComponent implements OnInit {
     guardarCoordenada(){
       alert(this.marker.getLngLat());
       let lngLat = this.marker.getLngLat();
-      console.log("lo que sale "+lngLat);
+     
      
       this.coordenadas.lat=lngLat.lat;
       this.coordenadas.long=lngLat.lng;
-      console.log("lo que se guarda en this.coordenadas");
-      console.log(this.coordenadas);
+      
       this.ngModal.dismissAll();
     }
      
@@ -108,7 +107,7 @@ export class TareaComponent implements OnInit {
       tarea.nombreTarea=this.tareaForm.value.nombreTarea;
       tarea.coordenada=this.coordenadas;
       tarea.status=false;
-      console.log(tarea);
+      
       
       this.tareaService.addTarea(tarea); 
       alert(this.tareaForm.controls['nombreTarea'].value + ' tarea ha sido agregada!')

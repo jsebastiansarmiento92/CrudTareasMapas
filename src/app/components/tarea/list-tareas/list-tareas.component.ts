@@ -41,8 +41,7 @@ export class ListTareasComponent implements OnInit {
     let s = this.tareaService.getTareaList();
     s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
       this.tareas = [];
-      console.log("ingreso a cargar tareas desde firebase");
-      console.log(data);
+     
       let contador=0;
       data.forEach(item => {
         let a = item.payload.toJSON();
@@ -57,7 +56,7 @@ export class ListTareasComponent implements OnInit {
     
   }
   iniMarker(tarea:Tarea){
-    console.log("iniciar amrcadores con tareas");
+    
       this.marcador(tarea.coordenada.long,tarea.coordenada.lat);
     
   }
@@ -99,14 +98,13 @@ export class ListTareasComponent implements OnInit {
     this.router.navigate(['/tarea']);
   }
   editar(tarea, modal) {
-    console.log(tarea);
+   
     window.localStorage.setItem('idEdit', tarea.$key);
     this.ngModal.open(modal);
 
   }
   marcador(long:string,lat:string){
-    console.log("coordenada que llega");
-    console.log("lat: "+ lat+", long"+ long);
+    
     const marker = new Mapboxgl.Marker({
       draggable: true
       })

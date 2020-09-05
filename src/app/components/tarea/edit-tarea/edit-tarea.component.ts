@@ -119,7 +119,7 @@ export class EditTareaComponent implements OnInit {
       .addTo(this.map);
 
       this.marker.on('drag',()=>{
-        console.log(this.marker.getLngLat()) ;
+       
       })
 
   }
