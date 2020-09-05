@@ -13,11 +13,6 @@ export class InicioComponent implements OnInit {
 
   
 
-  //@ViewChild('tramitandoModal', { static: false }) tramitandoModal;
-  //@ViewChild('loginModal', { static: false }) loginModal;
-  //@ViewChild('guardarTelefonoModal', { static: false }) guardarTelefonoModal;
-
-
   /**
   * Shows or hide the search elements
   * @var {boolean} searching

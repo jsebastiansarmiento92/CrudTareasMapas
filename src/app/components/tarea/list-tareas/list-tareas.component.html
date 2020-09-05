@@ -16,15 +16,15 @@
 
 
     <div class="no-data text-center" *ngIf="preLoader">
-        <img src="assets/preloader.gif" class="preloader-icon" alt="No student">
+        <img src="assets/imageLogo/wigilabs-sas-76453739C0317BEDthumbnail.gif" class="preloader-icon" alt="No tareas">
     </div>
 
 
     <div class="no-data text-center" *ngIf="noData">
-        <img src="assets/no-student.svg" class="nodata-msg" alt="No student">
-        <p class="nodata-msg">No student added yet!</p>
-        <a routerLink="/register-student" class="btn btn-success">
-            <i class="fas fa-plus custom-fa-plus"></i> Add Student
+        <img src="assets/imageLogo/wigilabs-sas-76453739C0317BEDthumbnail.gif" class="nodata-msg" alt="No tareas">
+        <p class="nodata-msg">No hay tareas</p>
+        <a (click)="agregartarea()" class="btn btn-success">
+            <i style="margin-right: 2px;" class="material-icons">addchart</i> <i></i> Agregar tarea
         </a>
     </div>
 
@@ -36,7 +36,8 @@
                     <th scope="col">Tarea Id</th>
                     <th scope="col">nombreTarea</th>
                     <th scope="col">descripcion</th>
-                    <th scope="col">coordenadas</th>
+                    <th scope="col">coordenada</th>
+                    <th scope="col">estado</th>
                     <th class="text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -47,7 +48,20 @@
                     <th scope="row">{{tarea.$key}}</th>
                     <td>{{tarea.nombreTarea}} </td>
                     <td>{{tarea.descripcion}}</td>
-                    <td>{{tarea.coordenadas}}</td>
+                    <td>lat:{{tarea.coordenada.lat}}, long:{{tarea.coordenada.long}}</td>
+                    <td>
+                        <a (click)="completar(tarea)" class="btn btn-success" *ngIf="tarea.status;else elseStatus">
+                            <i style="margin-right: 2px;" class="material-icons">check_circle_outline</i> <i></i> sin completar
+                        </a>
+                    </td>
+                    <ng-template #elseStatus>
+                        <td>
+                            <a (click)="completar(tarea)" class="btn btn-danger">
+                                <i style="margin-right: 2px;" class="material-icons">check_circle</i> <i></i>completar
+                            </a>
+                        </td>
+
+                    </ng-template>
                     <td class="text-center action-block">
                         <i style="margin-right: 2px;" class="material-icons" (click)="deleteTarea(tarea)">delete</i>
                         <i style="margin-right: 2px;" class="material-icons" (click)="editar(tarea, modalEditar)">edit</i>
@@ -56,10 +70,17 @@
             </tbody>
         </table>
     </div>
-    <!-- Pagination -->
-    <!--  <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>-->
+
 
 </div>
+
+<h2>Posicion de tareas</h2>
+<div id="mapa-mapbox">
+
+</div>
+
+<pre id="coordinates" class="coordinates"></pre>
+
 <ng-template #modalEditar>
     <app-edit-tarea></app-edit-tarea>
 </ng-template>

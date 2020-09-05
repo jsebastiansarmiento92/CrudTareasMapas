@@ -7,13 +7,13 @@ import { Foto } from '../models/foto';
 })
 export class GaleriaServiceService {
 
-  fotosRef: AngularFireList<any>;    // Reference to Student data list, its an Observable
-  fotoRef: AngularFireObject<any>;   // Reference to Student object, its an Observable too
+  fotosRef: AngularFireList<any>;   
+  fotoRef: AngularFireObject<any>;   
   
-  // Inject AngularFireDatabase Dependency in Constructor
+
   constructor(private db: AngularFireDatabase) { }
 
-  // Create Student
+
   addFoto(foto: Foto) {
     this.fotosRef.push({
       imgUrl: foto.url,
@@ -31,14 +31,14 @@ export class GaleriaServiceService {
     return this.fotosRef;
   }  
 
-  // Update Student Object
+
   updateFoto(foto: Foto) {
     this.fotoRef.update({
       imgUrl: foto.url
     })
   }  
 
-  // Delete Student Object
+
   deleteFoto(id: string) { 
     this.fotoRef = this.db.object('fotos/'+id);
     this.fotoRef.remove();

@@ -7,19 +7,19 @@ import { Tarea } from '../models/tarea';
 })
 
 export class TareaServiceService {
-  tareasRef: AngularFireList<any>;    // Reference to Student data list, its an Observable
-  tareaRef: AngularFireObject<any>;   // Reference to Student object, its an Observable too
+  tareasRef: AngularFireList<any>;    
+  tareaRef: AngularFireObject<any>;   
   
-  // Inject AngularFireDatabase Dependency in Constructor
+
   constructor(private db: AngularFireDatabase) { }
 
-  // Create Student
+
   addTarea(tarea: Tarea) {
     this.tareasRef.push({
       nombreTarea: tarea.nombreTarea,
       descripcion: tarea.descripcion,
-      coordenadas: tarea.coordenadas,
-      
+      coordenada: tarea.coordenada,
+      status: tarea.status
     })
   }
 
@@ -35,16 +35,27 @@ export class TareaServiceService {
     return this.tareasRef;
   }  
 
-  // Update Student Object
+ 
   updateTarea(tarea: Tarea) {
+    console.log("dtaos que ingresan en el update");
+    console.log(tarea);
     this.tareaRef.update({
       nombreTarea: tarea.nombreTarea,
       descripcion: tarea.descripcion,
-      coordenadas: tarea.coordenadas,
+      coordenada: tarea.coordenada,
+      status: tarea.status
+    })
+  }  
+  updateTareaStatus(tarea: Tarea) {
+    this.tareaRef = this.db.object('tarea-list/'+tarea.$key);
+    this.tareaRef.update({
+      coordenada: tarea.coordenada,
+      descripcion: tarea.descripcion,
+      nombreTarea: tarea.nombreTarea,
+      status: tarea.status
     })
   }  
 
-  // Delete Student Object
   deleteTarea(id: string) { 
     this.tareaRef = this.db.object('tarea-list/'+id);
     this.tareaRef.remove();

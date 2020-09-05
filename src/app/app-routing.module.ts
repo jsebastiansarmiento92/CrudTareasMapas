@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//import { AppComponent } from './app.component';
+
 
 
 const routes: Routes = [
@@ -10,13 +10,12 @@ const routes: Routes = [
     { path: 'galeria', loadChildren: () => import('./components/galeria/galeria.module').then(m => m.GaleriaModule)},
     { path: 'tarea', loadChildren: () => import('./components/tarea/tarea.module').then(m => m.TareaModule)},
     { path: 'list-tarea', loadChildren: () => import('./components/tarea/list-tareas/list-tareas.module').then(m => m.ListTareasModule)},
-   // { path: 'access-denied', loadChildren: () => import('./access-denied/access-denied.module').then(m => m.AccessDeniedModule) },
-   // { path: 'not-found', loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule) },
+
     { path: '**', redirectTo: 'inicio' }
 ];
 
 @NgModule({
-    //imports: [RouterModule.forRoot(routes,  { enableTracing: true })],
+
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })

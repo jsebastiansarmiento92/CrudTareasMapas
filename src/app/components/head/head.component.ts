@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -11,26 +12,27 @@ import { Router } from '@angular/router';
 export class HeadComponent implements OnInit {
   
   mensajeTramitando="";
-  //@ViewChild('guardarTelefonoModal', { static: false }) guardarTelefonoModal;
-  //@ViewChild('tramitandoModal', { static: false }) tramitandoModal;
-  //@ViewChild('mostrarPedidosModal', { static: false }) mostrarPedidosModal;
+
   
-  constructor(private router:Router) { }
+  constructor(private router:Router,private ngModal:NgbModal) { }
 
   ngOnInit() {
     
   }
 
   galeria(){
-    console.log("ruta de galeria")
+   
     this.router.navigate(['/galeria']);
   }
   tarea(){
-    console.log("ruta de galeria")
+    
     this.router.navigate(['/tarea']);
   }
   listarTareas(){
-    console.log("ruta de listar tarea")
+    
     this.router.navigate(['/list-tarea']);
+  }
+  contacto(modal){
+    this.ngModal.open(modal);
   }
 }

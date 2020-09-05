@@ -9,7 +9,6 @@ const routes: Routes = [
   {path: '',component: ListTareasComponent,
   children: [
     {path: '', redirectTo: 'inicio', pathMatch: 'prefix'},
- // { path: 'listar', loadChildren: () => import('./listar/listar.module').then(m => m.ListarModule)},
   { path: 'list-tarea', loadChildren: () => import('./list-tareas.module').then(m => m.ListTareasModule)},
   {path: '**', redirectTo: 'inicio', pathMatch: 'full'}
 ]

@@ -4,21 +4,16 @@ import { InicioRoutingModule } from './inicio-routing.module';
 import {FormsModule}from '@angular/forms';
 import { InicioComponent } from './inicio.component';
 
-import { PipeSearchPipe } from './pipe/pipe-search.pipe';
-
-
-
 
 
 @NgModule({
   imports: [
       CommonModule,
-      //TranslateModule,
     InicioRoutingModule,
      FormsModule
      
   ],
-  declarations: [InicioComponent, PipeSearchPipe],
+  declarations: [InicioComponent],
  
 })
 export class InicioModule { }

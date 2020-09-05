@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-translate">
             <a class="card-header card-header-image" style="border-bottom: none;height: 73px;padding-top: 0px;">
-                <img height="80px" alt="Crud">
+                <img src="assets/imageLogo/wigilabs-sas-76453739C0317BEDthumbnail.gif" height="80px" alt="Crud">
             </a>
             <button class="navbar-toggler" style="color: black;" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="sr-only"></span>
@@ -43,55 +43,21 @@
                     </div>
 
                 </li>
-                <li class="dropdown nav-item">
-
-                    <a style="margin-left: 0px;" class="cursormanito dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="material-icons">location_on</i>Mi Direccion
-                    </a>
-                    <div class="dropdown-menu dropdown-with-icons">
-                        <a style="margin-left: 10px; margin-right: 2px;" class="cursormanito dropdown-item">
-                            <i style="margin-right: 2px;" class="material-icons">location_on</i>Direccion:
-                            <marquee width="100%" scrolldelay="100" scrollamount="5" direction="left" loop="infinite">
-                            </marquee>
-                        </a>
-
-                        <a style="margin-left: 10px; margin-right: 2px;" class="cursormanito dropdown-item">
-
-                            <i style="margin-right: 2px;" class="material-icons">location_on</i>Barrio:
-                            <marquee width="100%" scrolldelay="100" scrollamount="5" direction="left" loop="infinite">
-                            </marquee>
-
-                        </a>
-                        <li class="button-container nav-item iframe-extern">
-                            <a style="color: white;" class="btn  btn-rose btn-round btn-instagram">
-                Cambiar
-            </a>
-                        </li>
-                    </div>
-                </li>
-
 
                 <li class="dropdown nav-item">
 
                     <a style="margin-left: 0px;" class="dropdown-toggle nav-link cursormanito" data-toggle="dropdown">
-                        <i class="material-icons">shopping_basket</i>Mis Pedidos
-                    </a>
-
-                </li>
-                <li class="dropdown nav-item">
-
-                    <a style="margin-left: 0px;" class="dropdown-toggle nav-link cursormanito" data-toggle="dropdown">
-                        <i class="material-icons">headset_mic</i>tareas
+                        <i class="material-icons">pending_actions</i>tareas
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
                         <div>
 
                             <a style="margin-left: 10px; margin-right: 2px;" class="dropdown-item cursormanito" (click)="tarea()">
-                                <i style="margin-right: 2px;" class="material-icons">shop_two</i>Agregar
+                                <i style="margin-right: 2px;" class="material-icons">add_task</i>Agregar
                             </a>
 
                             <a style="margin-left: 10px; margin-right: 2px;" class="dropdown-item cursormanito" (click)="listarTareas()">
-                                <i style="margin-right: 2px;" class="material-icons">shop_two</i>Listar
+                                <i style="margin-right: 2px;" class="material-icons">list</i>Listar
                             </a>
                         </div>
 
@@ -104,13 +70,21 @@
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
                         <div (click)="galeria()">
-
                             <a style="margin-left: 10px; margin-right: 2px;" class="dropdown-item cursormanito">
-                                <i style="margin-right: 2px;" class="material-icons">shop_two</i>Galeria de fotos
+                                <i style="margin-right: 2px;" class="material-icons">burst_mode</i>Galeria de fotos
                             </a>
                         </div>
+                        <div (click)="contacto(contactoModal)">
 
+                            <a style="margin-left: 10px; margin-right: 2px;" class="dropdown-item cursormanito">
+                                <i style="margin-right: 2px;" class="material-icons">connect_without_contact</i>Contacto
+                            </a>
+                        </div>
                     </div>
+
+
+
+
                 </li>
 
 
@@ -131,98 +105,9 @@
                         </a>
                     </div>
                 </li>
-                <!--<li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="material-icons">view_day</i> Secciones
-                    </a>
-                    <div class="dropdown-menu dropdown-with-icons">
-                        <a href="../sections.html#headers" class="dropdown-item">
-                            <i class="material-icons">dns</i> Emcabezados
-                        </a>
-                        <a href="../sections.html#features" class="dropdown-item">
-                            <i class="material-icons">build</i> Caracteristicas
-                        </a>
-                        <a href="../sections.html#blogs" class="dropdown-item">
-                            <i class="material-icons">list</i> Blogs
-                        </a>
-                        <a href="../sections.html#teams" class="dropdown-item">
-                            <i class="material-icons">people</i> Equipos
-                        </a>
-                        <a href="../sections.html#projects" class="dropdown-item">
-                            <i class="material-icons">assignment</i> Proyectos
-                        </a>
-                        <a href="../sections.html#pricing" class="dropdown-item">
-                            <i class="material-icons">monetization_on</i>Precios
-                        </a>
-                        <a href="../sections.html#testimonials" class="dropdown-item">
-                            <i class="material-icons">chat</i> Testimonios
-                        </a>
-                        <a href="../sections.html#contactus" class="dropdown-item">
-                            <i class="material-icons">call</i> Contactos
-                        </a>
-                    </div>
-                </li>-->
-                <!--  <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="material-icons">view_carousel</i> Examples
-                    </a>
-                    <div class="dropdown-menu dropdown-with-icons">
-                        <a href="../examples/about-us.html" class="dropdown-item">
-                            <i class="material-icons">account_balance</i> About Us
-                        </a>
-                        <a href="../examples/blog-post.html" class="dropdown-item">
-                            <i class="material-icons">art_track</i> Blog Post
-                        </a>
-                        <a href="../examples/blog-posts.html" class="dropdown-item">
-                            <i class="material-icons">view_quilt</i> Blog Posts
-                        </a>
-                        <a href="../examples/contact-us.html" class="dropdown-item">
-                            <i class="material-icons">location_on</i> Contact Us
-                        </a>
-                        <a href="../examples/landing-page.html" class="dropdown-item">
-                            <i class="material-icons">view_day</i> Landing Page
-                        </a>
-                        <a href="../examples/login-page.html" class="dropdown-item">
-                            <i class="material-icons">fingerprint</i> Login Page
-                        </a>
-                        <a href="../examples/pricing.html" class="dropdown-item">
-                            <i class="material-icons">attach_money</i> Pricing Page
-                        </a>
-                        <a href="../examples/shopping-cart.html" class="dropdown-item">
-                            <i class="material-icons">shopping_basket</i> Shopping Cart
-                        </a>
-                        <a href="../examples/ecommerce.html" class="dropdown-item">
-                            <i class="material-icons">store</i> Ecommerce Page
-                        </a>
-                        <a href="../examples/product-page.html" class="dropdown-item">
-                            <i class="material-icons">shopping_cart</i> Product Page
-                        </a>
-                        <a href="../examples/profile-page.html" class="dropdown-item">
-                            <i class="material-icons">account_circle</i> Profile Page
-                        </a>
-                        <a href="../examples/signup-page.html" class="dropdown-item">
-                            <i class="material-icons">person_add</i> Signup Page
-                        </a>
-                    </div>
-                </li>-->
-                <div>
-                    <li class="button-container nav-item iframe-extern">
 
-                        <a style="margin-top: 2vh;  color: white;" class="btn  btn-rose   btn-round btn-block">
-                            <i class="material-icons">login</i> Iniciar Sesion
-                        </a>
-                    </li>
 
-                </div>
-                <div>
-                    <li class="button-container nav-item iframe-extern">
 
-                        <a style="background-color: #df0000ef; margin-top: 2vh; color: white;" class="btn  btn-rose   btn-round btn-block">
-                            <i class="material-icons">login</i> Registrarse
-                        </a>
-                    </li>
-
-                </div>
                 <ng-template #elseBlock>
                     <li class="button-container nav-item iframe-extern">
                         <a style="margin-top: 2vh; color: white;" class="btn  btn-rose btn-round btn-danger">
@@ -237,3 +122,6 @@
         </div>
     </div>
 </nav>
+<ng-template #contactoModal>
+    <app-contact></app-contact>
+</ng-template>

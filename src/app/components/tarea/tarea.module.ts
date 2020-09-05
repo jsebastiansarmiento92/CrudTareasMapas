@@ -8,10 +8,10 @@ import { NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import { EditTareaComponent } from './edit-tarea/edit-tarea.component';
 
 
+
 @NgModule({
   imports: [
       CommonModule,
-      //TranslateModule,
     TareaRoutingModule,
     ReactiveFormsModule,
     NgbModalModule

@@ -1,0 +1,71 @@
+<div class="main main-raised">
+    <div class="contact-content">
+        <div class="container">
+            <h2 class="title">Envia tus comentarios o dudas</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="description">
+                        Puede contactarnos con cualquier tema relacionado con nuestros Productos.&apos; Nos pondremos en contacto contigo lo antes posible.<br><br>
+                    </p>
+                    <form role="form" #f="ngForm" novalidate>
+                        <div class="form-group">
+                            <label for="nombre" class="bmd-label-floating">Nombre</label>
+                            <input type="text" [(ngModel)]="contacto.nombre" class="form-control" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmails" class="bmd-label-floating">Email</label>
+                            <input type="email" [(ngModel)]="contacto.email" class="form-control" name="email" required>
+                            <span class="bmd-help">
+                                Nunca compartiremos su correo electrónico con nadie más.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono" class="bmd-label-floating">Telefono</label>
+                            <input type="number" [(ngModel)]="contacto.telefono" class="form-control" name="telefono" required>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="form-control-label bmd-label-floating" for="mensaje"> Escribe tu mensaje</label>
+                            <textarea class="form-control" [(ngModel)]="contacto.mensaje" rows="6" name="mensaje" required></textarea>
+                        </div>
+                        <div class="submit text-center">
+                            <input (click)="agregarContacto()" class="btn btn-primary btn-raised btn-round" [disabled]="!f.valid" value="Contacta con nosotros">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 ml-auto">
+                    <div class="info info-horizontal">
+                        <div class="icon icon-primary">
+                            <i class="material-icons">pin_drop</i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">
+                                Encuéntranos en la oficina</h4>
+                            <p> Carrera xx-xxx-xx<br> Sector xxxx<br> Bogota
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info info-horizontal">
+                        <div class="icon icon-primary">
+                            <i class="material-icons">phone</i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Llamanos al</h4>
+                            <p> Bogota<br> +57 xxx xxxx xxx<br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info info-horizontal">
+                        <div class="icon icon-primary">
+                            <i class="material-icons">business_center</i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Información legal
+                            </h4>
+                            <p> wigilabs.com.<br> XX &#xB7; XXX<br> &#xB7; oficina juridica xxxxx<br> &#xB7;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

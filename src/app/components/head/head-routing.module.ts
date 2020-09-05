@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { HeadComponent } from './head.component';
 
 const routes: Routes = [
-  {
-      path: '',
-      component: HeadComponent
+  {path: '',component: HeadComponent,
+  children: [
+   
+]
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

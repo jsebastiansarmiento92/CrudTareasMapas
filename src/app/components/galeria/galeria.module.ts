@@ -8,7 +8,6 @@ import { GaleriaComponent } from './galeria.component';
 @NgModule({
   imports: [
       CommonModule,
-      //TranslateModule,
     GaleriaRoutingModule
   ],
   declarations: [GaleriaComponent],

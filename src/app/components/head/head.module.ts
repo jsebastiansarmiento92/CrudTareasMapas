@@ -5,15 +5,14 @@ import { HeadRoutingModule } from './head-routing.module';
 import { HeadComponent } from './head.component';
 
 import { FormsModule } from '@angular/forms';
+import { ContactComponent } from './contact/contact.component';
+
+
 
 @NgModule({
   imports: [
       CommonModule
-      //TranslateModule,
-      // HeadRoutingModule,
-      
-    //  FormsModule
-      
+
   ],
   declarations: []
 })

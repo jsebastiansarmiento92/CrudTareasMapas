@@ -4,6 +4,9 @@ import { TareaServiceService } from 'src/app/servicios/tarea-service.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
+import * as Mapboxgl from 'mapbox-gl'
+
+
 
 @Component({
   selector: 'app-list-tareas',
@@ -17,39 +20,64 @@ export class ListTareasComponent implements OnInit {
   ocultar: boolean = false; // Hide students data table when no student.
   noData: boolean = false;            // Showing No Student Message, when no student in database.
   preLoader: boolean = true;          // Showing Preloader to show user data is coming for you from thre server(A tiny UX Shit)
-  tarea:Tarea;
+  tarea: Tarea;
+  map :Mapboxgl.Map;
 
-  
-  public tareaForm: FormGroup; 
+  public tareaForm: FormGroup;
 
 
 
 
   constructor(
-    public tareaServive: TareaServiceService,
-    private router:Router,
-    private ngModal:NgbModal // Toastr service for alert message
-    ){ }
+    public tareaService: TareaServiceService,
+    private router: Router,
+    private ngModal: NgbModal // Toastr service for alert message
+  ) { }
 
 
   ngOnInit() {
+    this.iniMap();
     this.dataState(); // Initialize student's list, when component is ready
-    let s = this.tareaServive.getTareaList();
+    let s = this.tareaService.getTareaList();
     s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
       this.tareas = [];
+      console.log("ingreso a cargar tareas desde firebase");
+      console.log(data);
+      let contador=0;
       data.forEach(item => {
-        let a = item.payload.toJSON(); 
+        let a = item.payload.toJSON();
         a['$key'] = item.key;
-        this.tareas.push(a as Tarea);
+        let tareaTemporal:Tarea=a as Tarea;
+        this.iniMarker(tareaTemporal);
+        this.tareas.push(tareaTemporal);
+        
       })
-    })
+    });
+    this.iniMap();
+    
   }
+  iniMarker(tarea:Tarea){
+    console.log("iniciar amrcadores con tareas");
+      this.marcador(tarea.coordenada.long,tarea.coordenada.lat);
+    
+  }
+  iniMap() {
+    Mapboxgl.accessToken = 'pk.eyJ1IjoianVhbnNlciIsImEiOiJja2VubTdoZ24wdjhwMzBxbXg5aXRpcXE4In0.OCMogAb-ZzugDZZrXP3ewQ';
+    this.map = new Mapboxgl.Map({
+      container: 'mapa-mapbox', // container id
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-74.08005221644875,4.624016228049641 ], // long 73.356226  //lat 5.5415653 position
+      zoom: 16 // starting zoom
+    });
 
+    // Add zoom and rotation controls to the map.
+    this.map.addControl(new Mapboxgl.NavigationControl());
+  }
   // Using valueChanges() method to fetch simple list of students data. It updates the state of hideWhenNoStudent, noData & preLoader variables when any changes occurs in student data list in real-time.
-  dataState() {     
-    this.tareaServive.getTareaList().valueChanges().subscribe(data => {
+  dataState() {
+    this.tareaService.getTareaList().valueChanges().subscribe(data => {
       this.preLoader = false;
-      if(data.length <= 0){
+      if (data.length <= 0) {
         this.ocultar = false;
         this.noData = true;
       } else {
@@ -61,20 +89,36 @@ export class ListTareasComponent implements OnInit {
 
   // Method to delete student object
   deleteTarea(tarea) {
-    if (window.confirm('Seguro desea eleiminar tarea?')) { // Asking from user before Deleting student data.
-      this.tareaServive.deleteTarea(tarea.$key) // Using Delete student API to delete student.
+    if (window.confirm('Seguro desea eleiminar tarea?')) { 
+      this.tareaService.deleteTarea(tarea.$key) 
       alert(tarea.nombreTarea + ' tarea eliminada!');
-     // this.toastr.success(); // Alert message will show up when student successfully deleted.
+
     }
   }
-  agregartarea(){
+  agregartarea() {
     this.router.navigate(['/tarea']);
   }
-  editar(tarea,modal){
+  editar(tarea, modal) {
     console.log(tarea);
-    window.localStorage.setItem('idEdit',tarea.$key);
+    window.localStorage.setItem('idEdit', tarea.$key);
     this.ngModal.open(modal);
 
   }
+  marcador(long:string,lat:string){
+    console.log("coordenada que llega");
+    console.log("lat: "+ lat+", long"+ long);
+    const marker = new Mapboxgl.Marker({
+      draggable: true
+      })
+      .setLngLat([long, lat])
+      .addTo(this.map);
+  }
 
+
+  completar(tarea){
+    tarea.status=!tarea.status;
+     this.tareaService.updateTareaStatus(tarea);
+     if(tarea.status)alert("tarea ha sido finalizada")
+     else alert("tarea ha sido reactivada");
+  }
 }

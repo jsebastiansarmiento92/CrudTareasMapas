@@ -8,7 +8,7 @@
 
                     </div>
 
-                    <!-- Student form -->
+
                     <form [formGroup]="tareaForm" (ngSubmit)="submitTareaData()" novalidate>
                         <div class="row">
                             <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -17,14 +17,14 @@
                                     <div class="col-md-12 mb-3">
                                         <label>nombre tarea</label> <strong></strong>
                                         <input type="text" formControlName="nombreTarea" class="form-control" required>
-                                        <!-- Showing errors using getter method -->
+
                                         <p *ngIf="nombreTarea.touched && nombreTarea.invalid" class="error"><sup>*</sup>Nombre no valido</p>
                                         <p *ngIf="descripcion.errors?.minlength" class="error"><sup>*</sup>nombre debe tener mas de dos letras</p>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label>Descripcion</label>
-                                        <input type="text" formControlName="descripcion" class="form-control">
+                                        <input type="text" formControlName="descripcion" class="form-control" required>
                                     </div>
 
                                 </div>
@@ -32,9 +32,12 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label>Coordenadas</label>
-                                        <input type="text" formControlName="coordenadas" class="form-control" required>
-
+                                        <br>
+                                        <button type="button" class="btn btn-dark gap-right" (click)="mapModal(modalMap)">Agregar coordenada</button>
+                                        <label> Lat= {{coordenadas.lat}}, Long= {{coordenadas.long}}</label>
                                     </div>
+
+                                    <pre id="coordinates" class="coordinates"></pre>
                                 </div>
 
                                 <div class="form-group text-right">
@@ -53,3 +56,14 @@
 <hr>
 <router-outlet></router-outlet>
 <hr>
+
+<ng-template #modalMap>
+
+    <button type="submit" class="btn btn-success" (click)="guardarCoordenada()">Guardar Posicion</button>
+
+    <div id="map">
+
+    </div>
+    <pre id="coordinates" class="coordinates"></pre>
+
+</ng-template>

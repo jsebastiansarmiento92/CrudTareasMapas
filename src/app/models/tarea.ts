@@ -1,7 +1,9 @@
+import { Coordenada } from './coordenada';
+
 export class Tarea {
     $key: string;
     nombreTarea:string;
     descripcion:string;
-    coordenadas:string;
+    coordenada:Coordenada;
     status:boolean;
 }

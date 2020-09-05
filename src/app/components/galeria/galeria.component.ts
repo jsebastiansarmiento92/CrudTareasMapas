@@ -25,9 +25,9 @@ export class GaleriaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dataState(); // Initialize student's list, when component is ready
+    this.dataState();
     let s = this.galeriaService.getFotoList();
-    s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
+    s.snapshotChanges().subscribe(data => { 
       this.fotos = [];
       data.forEach(item => {
         let a = item.payload.toJSON(); 
