@@ -1,7 +1,8 @@
 <nav class="navbar fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
     <div class="container">
         <div class="navbar-translate">
-            <a class="card-header card-header-image" style="border-bottom: none;height: 73px;padding-top: 0px;">
+            <!--etiqueta donde muestra la imagen  o logo y dando un click dirije al inicio de la pagina-->
+            <a class="card-header card-header-image" (click)="inicio()" style="border-bottom: none;height: 73px;padding-top: 0px;">
                 <img src="assets/imageLogo/wigilabs-sas-76453739C0317BEDthumbnail.gif" height="80px" alt="Crud">
             </a>
             <button class="navbar-toggler" style="color: black;" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +18,6 @@
                 <li class="dropdown nav-item">
 
                     <a style="padding-bottom: 0%; margin-bottom: 0%;" class="cursormanito nav-link" data-toggle="dropdown">
-                        <!--i class="material-icons" style="font-size:30px;color:green">account_circle</i> Cuenta-->
                         <div style="margin: inherit;" class="fileinput fileinput-new text-center" data-provides="fileinput">
                             <div class="fileinput-new thumbnail img-circle img-raised">
 
@@ -43,7 +43,8 @@
                     </div>
 
                 </li>
-
+                <!--seccion donde esta las opciones del head estas como son llamadas directamente en el html del componente principal o header apareceran en todo componentes
+                que despliegue desde alli -->
                 <li class="dropdown nav-item">
 
                     <a style="margin-left: 0px;" class="dropdown-toggle nav-link cursormanito" data-toggle="dropdown">
@@ -122,6 +123,9 @@
         </div>
     </div>
 </nav>
+<!--modal que se muestra cuando se le da click a contacto gracias a la etiqueta template-->
 <ng-template #contactoModal>
+    <!--componente de contacto que se muestra dentro del modal es posible mostrar componentes hijos llamado directamente con el selector en este caso
+    "app-contact" el cual hace parte del componente contacto -->
     <app-contact></app-contact>
 </ng-template>

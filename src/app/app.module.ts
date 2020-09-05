@@ -17,7 +17,8 @@ import { ContactComponent } from './components/head/contact/contact.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeadComponent,ContactComponent   
+    HeadComponent,
+    ContactComponent   
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeadRoutingModule } from './head-routing.module';
-
-import { HeadComponent } from './head.component';
-
-import { FormsModule } from '@angular/forms';
-import { ContactComponent } from './contact/contact.component';
 
 
 
+//modulo el cual se deja pendiente en dado caso se deba crear un hijo a partir de este componente
 @NgModule({
   imports: [
       CommonModule
 
   ],
-  declarations: []
+  declarations: []//es declarado en el modulo padre 
 })
 export class HeadModule { }

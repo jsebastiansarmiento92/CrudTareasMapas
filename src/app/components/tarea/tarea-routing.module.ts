@@ -4,7 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { TareaComponent } from './tarea.component';
 
 
-
+/**
+ * modulo de rutas del componente tarea donde pueden agregarse rutas de subcomponentes preferiblemente a partir de este modulo agregados en tarea.module.ts
+ */
 
 const routes: Routes = [
   {

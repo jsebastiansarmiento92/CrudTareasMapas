@@ -9,7 +9,8 @@ import * as Mapboxgl from 'mapbox-gl'
 import { Tarea } from 'src/app/models/tarea';
 
 
-
+/**componente el cual se encarga de validar formulario, guardar en base de datos tareas y cargar mapa
+ */
 @Component({
   selector: 'app-edit-tarea',
   templateUrl: './edit-tarea.component.html',
@@ -17,37 +18,29 @@ import { Tarea } from 'src/app/models/tarea';
 })
 export class EditTareaComponent implements OnInit {
 
-  tareaForm: FormGroup; 
-  coordenadas:Coordenada= new Coordenada();
-  marker:Mapboxgl.Marker;
-  map :Mapboxgl.Map;
-  tarea:Tarea;
+  tareaForm: FormGroup; //formulario binding "formGroup"
+  coordenadas:Coordenada= new Coordenada();// clase o modelo coordenada  el cual guarda la coordenada de marcador
+  marker:Mapboxgl.Marker; //marcador donde viene en formato Json latitud y longitud 
+  map :Mapboxgl.Map; // mapa mostrado en modal
+  tarea:Tarea; // clase o modal donde guarda la tarea del formulario 
 
   constructor(
-    private tareaService: TareaServiceService,       
-    private fb: FormBuilder,            
-    private location: Location,         
-    private actRoute: ActivatedRoute,  
-    private router: Router, 
-    private ngmodal:NgbModal         
+    private tareaService: TareaServiceService,//servicio donde hace posible la interaccion crud de nuestras tareas       
+    private fb: FormBuilder,//clase donde donde agrupa datos del formulario y hace posible la validacion de los datos 
+    private router: Router, //  instanciacion de clase router el cual se encarga de trasladarse de un componente a otro
+    private ngmodal:NgbModal    //isntanciacion de clase modal para abrir ventana emergente de componente contact     
         
   ){ }
-
+  //metodo de inicializacion el cual extrae del localstorage el id de la tarea seleccionada anteriormente en la lista de tareas para su cargar y mostrarla
+  //en los campos del fomrulario
   ngOnInit() {
-    console.log("ingreso a lo init de editar");
     const id= window.localStorage.getItem('idEdit');
-    console.log("id es "+ id)
     this.tareaService.getTarea(id).valueChanges().subscribe(data => {
-      console.log(data);
       this.tarea= data as Tarea;
-      console.log("tarea es:")
-      console.log(this.tarea);
       this.tareaForm.setValue(data)  
     })
-    this.updateTareaData();   
-    
-  
-    
+    this.updateTareaData();   //validador de campos
+
   }
 
 
@@ -67,7 +60,7 @@ export class EditTareaComponent implements OnInit {
   }
 
 
-
+  //metodo que realiza una validacion al formualio 
   updateTareaData() {
     this.tareaForm = this.fb.group({
       nombreTarea: ['', [Validators.required, Validators.minLength(2)]],
@@ -78,51 +71,46 @@ export class EditTareaComponent implements OnInit {
   }
 
 
-  goBack() {
-    this.location.back();
-  }
-
-
+ 
+  //metodo para modificar la tarea
   updateForm(){
-    console.log(this.tareaForm.value);
     this.tareaService.updateTarea(this.tareaForm.value);    
     alert(this.tareaForm.controls['nombreTarea'].value +' ha sido modificado');
-    this.router.navigate(['/list-tarea']);      
-    this.ngmodal.dismissAll();
-    window.localStorage.removeItem('idEdit')
+    this.router.navigate(['/list-tarea']); //una ves modificada redirige a la lsita de tarea     
+    this.ngmodal.dismissAll();//cierra todos los modales abiertos
+    window.localStorage.removeItem('idEdit')//vacia el local storage
   }
+  //metodo el cual guarda la coordenada en la variable coordenadas y cierral el modal del mapa 
   guardarCoordenada(){
     alert(this.marker.getLngLat());
     let lngLat = this.marker.getLngLat();
-    console.log("lo que sale "+lngLat);
     this.coordenadas.lat=lngLat.lat;
     this.coordenadas.long=lngLat.lng;
-    console.log("lo que se guarda en this.coordenadas");
-    console.log(this.coordenadas);
     this.tarea.coordenada=this.coordenadas;
     this.tareaService.updateTarea(this.tarea);
     alert("coordenada cambiada");
     this.ngmodal.dismissAll();
   }
-  
+  //metodo el cual entra por parametro un modal en este caso para abrir el mapa
   mapModal(modal){
-      
     this.ngmodal.open(modal);
     this.iniMap();
     this.marcador(this.tarea.coordenada.long,this.tarea.coordenada.lat); 
    }
+   //metodo inicializador del mapa donde vamos a trabajar
    iniMap() {
-    Mapboxgl.accessToken = 'pk.eyJ1IjoianVhbnNlciIsImEiOiJja2VubTdoZ24wdjhwMzBxbXg5aXRpcXE4In0.OCMogAb-ZzugDZZrXP3ewQ';
+    Mapboxgl.accessToken = 'pk.eyJ1IjoianVhbnNlciIsImEiOiJja2VubTdoZ24wdjhwMzBxbXg5aXRpcXE4In0.OCMogAb-ZzugDZZrXP3ewQ'; //en este caso se puede tomar directamente llamando constante environments 
     this.map = new Mapboxgl.Map({
-      container: 'map', 
+      container: 'map', //contenedor o id de la etiqueta del mapa
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.tarea.coordenada.long ,this.tarea.coordenada.lat ], // long 73.356226  //lat 5.5415653 position
-      zoom: 16 
+      center: [this.tarea.coordenada.long ,this.tarea.coordenada.lat ], // long   //lat position
+      zoom: 16 //zoom del mapa
     });
 
-
+    
     this.map.addControl(new Mapboxgl.NavigationControl());
   }
+  //metodo que grafica con un marcador la posicion en latitud y longitud
   marcador(long:string,lat:string){
     this.marker = new Mapboxgl.Marker({
       draggable: true

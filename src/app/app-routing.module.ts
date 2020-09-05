@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-
+/**
+ * modulo de rutas padre donde se despliegan rutas de diferentes componentes los cuales son usados en la app aca es donde ocurre la magia de direcciones y rutas
+ * es recomendable poner en este lugar solo los componentes que son padre y de estos se encarguen de rutas a componentes hijos
+ */
 const routes: Routes = [
     { path: '', loadChildren: () => import('./components/inicio/inicio.module').then(m => m.InicioModule)},
     { path: 'inicio', loadChildren: () => import('./components/inicio/inicio.module').then(m => m.InicioModule) },

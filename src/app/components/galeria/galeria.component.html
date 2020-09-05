@@ -6,11 +6,12 @@
 <br>
 <div class="section section-text">
     <div class="row">
+        <!--directiva *ngFro de angular la cual hace recorrido de imagenes haciendo un binding con la variable fotos del componente galeria.component-->
         <div class="section col-md-10 ml-auto mr-auto" *ngFor="let foto of fotos">
             <div class="row">
                 <div class="col-md-4">
                     <img class="img-raised rounded img-fluid" alt="Raised Image" [src]="foto.url">
-                    <br><i>   Nombre de imagen: {{foto.$key}}</i>
+                    <br><i>Nombre de imagen: {{foto.$key}}</i>
                 </div>
             </div>
         </div>

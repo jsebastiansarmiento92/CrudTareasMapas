@@ -17,22 +17,23 @@ import * as Mapboxgl from 'mapbox-gl'
 })
 export class TareaComponent implements OnInit {
 
-  public tareaForm: FormGroup;  
-  map :Mapboxgl.Map;
-  marker:Mapboxgl.Marker;
-  coordenadas:Coordenada= new Coordenada();
-  constructor( public tareaService: TareaServiceService,  
-    public fb: FormBuilder,private router:Router,
-    private ngModal:NgbModal      
+  public tareaForm: FormGroup;  //formulario binding "formGroup"
+  map :Mapboxgl.Map;// mapa mostrado en modal
+  marker:Mapboxgl.Marker;//marcador donde viene en formato Json latitud y longitud 
+  coordenadas:Coordenada= new Coordenada();// clase o modelo coordenada  el cual guarda la coordenada de marcador
+
+
+  constructor( public tareaService: TareaServiceService,  //servicio donde hace posible la interaccion crud de nuestras tareas   
+    public fb: FormBuilder,private router:Router,//instanciacion de clase router el cual se encarga de trasladarse de un componente a otro
+    private ngModal:NgbModal      //isntanciacion de clase modal para abrir ventana emergente de componente contact
     ) { }
 
-  
+    //metodo que inicializa la conexion o referencia de la crud
     ngOnInit() {
-      
-      this.tareaService.getTareaList();  
-      this.tareaTForm();     
-      
+      this.tareaService.getTareaList();  //inicializador de referencia
+      this.tareaTForm();     //valdiador de campos en los input
     }
+    //metodo que grafica con un marcador la posicion en latitud y longitud
     marcador(long:string,lat:string){
       this.marker = new Mapboxgl.Marker({
         draggable: true
@@ -45,19 +46,20 @@ export class TareaComponent implements OnInit {
         })
 
     }
+      //metodo inicializador del mapa donde vamos a trabajar
     iniMap() {
       Mapboxgl.accessToken = 'pk.eyJ1IjoianVhbnNlciIsImEiOiJja2VubTdoZ24wdjhwMzBxbXg5aXRpcXE4In0.OCMogAb-ZzugDZZrXP3ewQ';
       this.map = new Mapboxgl.Map({
-        container: 'map', 
+        container: 'map', //contenedor o id de la etiqueta del mapa
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [-74.08005221644875 ,4.624016228049641 ], // long 73.356226  //lat 5.5415653 position
-        zoom: 16 
+        zoom: 16 //zoom del mapa
       });
   
  
       this.map.addControl(new Mapboxgl.NavigationControl());
     }
-  
+  //metodo que realiza una validacion al formualio 
     tareaTForm() {
       this.tareaForm = this.fb.group({
         nombreTarea: ['', [Validators.required, Validators.minLength(2)]],
@@ -66,6 +68,7 @@ export class TareaComponent implements OnInit {
         status: [''],
       })  
     }
+    //metodo el cual guarda la coordenada en la variable coordenadas y cierral el modal del mapa 
     guardarCoordenada(){
       alert(this.marker.getLngLat());
       let lngLat = this.marker.getLngLat();
@@ -93,11 +96,11 @@ export class TareaComponent implements OnInit {
   
    
   
- 
+    //resetea o pone en blanco los campos del formulario
     ResetForm() {
       this.tareaForm.reset();
     }  
-   
+    //metodo el cual guarda la tarea 
     submitTareaData() {
       let tarea=new Tarea();
       let coordenada= new Coordenada();
@@ -113,9 +116,8 @@ export class TareaComponent implements OnInit {
     
       this.ResetForm();  
      };
-
+//metodo el cual entra por parametro un modal en este caso para abrir el mapa
      mapModal(modal){
-      
       this.ngModal.open(modal);
       this.iniMap();
       this.marcador('-74.08005221644875','4.624016228049641'); 
